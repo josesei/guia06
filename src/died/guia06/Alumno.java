@@ -51,11 +51,11 @@ public class Alumno implements Comparable<Alumno> {
 		return this.nroLibreta.intValue();
 	}
 	
-	public List getCursosCursando() {
+	public List<Curso> getCursosCursando() {
 		return this.cursando;
 	}
 	
-	public List getCursosAprobados() {
+	public List<Curso> getCursosAprobados() {
 		return this.aprobados;
 	}
 	
