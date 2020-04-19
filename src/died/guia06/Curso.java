@@ -33,7 +33,7 @@ public class Curso {
 	}
 	
 	int getId() {
-		return this.creditos.intValue();
+		return this.id.intValue();
 	}
 	
 	public void setId(int id) {
@@ -97,7 +97,7 @@ public class Curso {
 		int contadorCursosMismoCiclo = 0;
 			
 		for(Curso c : a.getCursosCursando()) {
-			if(c.cicloLectivo == this.cicloLectivo) {
+			if(c.cicloLectivo.intValue() == this.cicloLectivo.intValue()) {
 				contadorCursosMismoCiclo++;
 			}
 		}
@@ -136,15 +136,16 @@ public class Curso {
 		List<Alumno> listaAlumnos = this.inscriptos;
 		listaAlumnos.sort(comp);
 		
-		Integer contadorAlumnos = 1;
 		String listado = "";
-		String renglonListado = "";
+		String fragmentoListado = "";
 		
-		for(Alumno a : listaAlumnos) {
-			renglonListado = contadorAlumnos + " - "+a.toString()+" || ";
-			listado+=renglonListado;
-			System.out.println(renglonListado);
-			contadorAlumnos++;
+		Alumno a;
+		
+		for(int i = 1; i <= listaAlumnos.size(); i++) {
+			a=listaAlumnos.get(i-1);
+			fragmentoListado = i + " - "+a.toString()+ "( " + a.getNombre() +" "+ a.getNroLibreta() +" "+a.creditosObtenidos() + ")" + " || ";
+			listado+=fragmentoListado;
+			System.out.println(fragmentoListado);
 		}
 		try {
 			log.registrar(this, "imprimir listado",this.inscriptos.size()+ listado);

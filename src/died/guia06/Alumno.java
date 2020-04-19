@@ -20,11 +20,12 @@ public class Alumno implements Comparable<Alumno> {
 
 	public int creditosObtenidos() {
 		int creditosAcum = 0;
-		for(int i = 0; i < this.aprobados.size(); i++) {
-			creditosAcum+=this.aprobados.get(i).getCreditos();
+		for(Curso c : this.aprobados) {
+			creditosAcum+=c.getCreditos();
 		}
 		return creditosAcum;
 	}
+
 
 	public void aprobar(Curso c) {
 		this.cursando.remove(c);
