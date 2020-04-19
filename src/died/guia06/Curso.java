@@ -32,9 +32,21 @@ public class Curso {
 		this.log = new Registro();
 	}
 	
+	public void setCreditos(int creditos) {
+		this.creditos = Integer.valueOf(creditos);
+	}
+	
 	public int getCreditos() {
-		return  creditos.intValue();
+		return this.creditos.intValue();
 	} 
+	
+	public void setCupo(Integer cupo) {
+		this.cupo = cupo;
+	}
+	
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
 	/**
 	 * Este método, verifica si el alumno se puede inscribir y si es así lo agrega al curso,
