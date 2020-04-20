@@ -100,7 +100,53 @@ public class Curso {
 	 *      c) puede estar inscripto en simultÃ¡neo a no mÃ¡s de 3 cursos del mismo ciclo lectivo.
 	 * 
 	 */
+	
 	public Boolean inscribir(Alumno a) {
+		String errores="";
+		
+		if(a.creditosObtenidos() < this.creditosRequeridos) {
+			errores+="Creditos insuficientes. ";
+		}
+		if(this.cupo <= this.inscriptos.size()) {
+			errores+="No hay cupo. ";
+		}
+		int contadorCursosMismoCiclo = 0;
+			
+		for(Curso c : a.getCursosCursando()) {
+			if(c.cicloLectivo.intValue() == this.cicloLectivo.intValue()) {
+				contadorCursosMismoCiclo++;
+			}
+		}
+		if(contadorCursosMismoCiclo>=3) {				
+			errores+="No puede estar inscripto a más de 3 cursos del mismo ciclo lectivo";
+		}
+		if(errores.compareTo("")!=0) {
+			System.out.println("Curso: "+this.nombre + "(ID:"+this.id+") - inscribir - [FALLO] - Alumno: "+a.getNombre()+"(Libreta:"+a.getNroLibreta()+") "+"Razones: "+ errores +"\n");
+			try{
+				log.registrar(this, "inscribir ","- [FALLO] - alumno: " + a.toString() + ". Razones: "+ errores +"\n");
+			}
+			catch(IOException e1){
+				System.out.println("Ha ocurrido una excepción del tipo IOException: " + e1.getMessage());
+				e1.printStackTrace();
+			}
+			return false;
+		}
+		else {
+			this.inscriptos.add(a);
+			a.inscripcionAceptada(this);
+			System.out.println("Curso: "+this.nombre + "(ID:"+this.id+") - inscribir - [ÉXITO] - Alumno: "+a.getNombre()+"(Libreta:"+a.getNroLibreta()+")\n");
+			try{
+				log.registrar(this, "inscribir ","- [ÉXITO] - alumno: " + a.toString() +"\n");
+			}
+			catch(IOException e1){
+				System.out.println("Ha ocurrido una excepción del tipo IOException: " + e1.getMessage());
+				e1.printStackTrace();
+			}
+			return true;
+		}
+	}
+	
+	public Boolean inscribirAlumno(Alumno a) {
 		
 		String errores="";
 		
