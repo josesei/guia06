@@ -53,6 +53,13 @@ class CursoTest {
 		c7.setCupo(10);
 		c7.setCreditosRequeridos(0);
 		c7.setCreditos(0);
+		c1.setNombre("curso1");
+		c2.setNombre("curso2");
+		c3.setNombre("curso3");
+		c4.setNombre("curso4");
+		c5.setNombre("curso5");
+		c6.setNombre("curso6");
+		c7.setNombre("curso7");
 	}
 	
 	@Test

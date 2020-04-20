@@ -32,6 +32,18 @@ public class Curso {
 		this.log = new Registro();
 	}
 	
+	public Curso(int id, String nombre, int cicloLectivo, int cupo, int creditos, int creditosRequeridos) {
+		super();
+		this.id = Integer.valueOf(id);
+		this.nombre = nombre;
+		this.cicloLectivo = Integer.valueOf(cicloLectivo);
+		this.cupo = Integer.valueOf(cupo);
+		this.log = new Registro();
+		this.creditos = Integer.valueOf(creditos);
+		this.creditosRequeridos = Integer.valueOf(creditosRequeridos);	
+		this.inscriptos = new ArrayList<Alumno>();
+	}
+	
 	int getId() {
 		return this.id.intValue();
 	}
@@ -64,7 +76,7 @@ public class Curso {
 		this.cupo = cupo;
 	}
 		
-	String getNombre() {
+	public String getNombre() {
 		return this.nombre;
 	}
 	
@@ -105,8 +117,9 @@ public class Curso {
 			errores+="No puede estar inscripto a más de 3 cursos del mismo ciclo lectivo";
 		}
 		if(errores.compareTo("")!=0) {
+			System.out.println("Curso: "+this.nombre + "(ID:"+this.id+") - inscribir - [FALLO] - Alumno: "+a.getNombre()+"(Libreta:"+a.getNroLibreta()+") "+"Razones: "+ errores +"\n");
 			try{
-				log.registrar(this, "inscribir ","- [EXITO] - alumno: " + a.toString() + ". Razones: "+ errores +"\n");
+				log.registrar(this, "inscribir ","- [FALLO] - alumno: " + a.toString() + ". Razones: "+ errores +"\n");
 			}
 			catch(IOException e1){
 				System.out.println("Ha ocurrido una excepción del tipo IOException: " + e1.getMessage());
@@ -117,8 +130,9 @@ public class Curso {
 		else {
 			this.inscriptos.add(a);
 			a.inscripcionAceptada(this);
+			System.out.println("Curso: "+this.nombre + "(ID:"+this.id+") - inscribir - [ÉXITO] - Alumno: "+a.getNombre()+"(Libreta:"+a.getNroLibreta()+")\n");
 			try{
-				log.registrar(this, "inscribir ","- [FALLO] - alumno: " + a.toString() +"\n");
+				log.registrar(this, "inscribir ","- [ÉXITO] - alumno: " + a.toString() +"\n");
 			}
 			catch(IOException e1){
 				System.out.println("Ha ocurrido una excepción del tipo IOException: " + e1.getMessage());
