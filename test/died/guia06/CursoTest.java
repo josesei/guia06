@@ -60,6 +60,13 @@ class CursoTest {
 		c5.setNombre("curso5");
 		c6.setNombre("curso6");
 		c7.setNombre("curso7");
+		c1.setId(1);
+		c2.setId(2);
+		c3.setId(3);
+		c4.setId(4);
+		c5.setId(5);
+		c6.setId(6);
+		c7.setId(7);
 	}
 	
 	@Test
@@ -87,9 +94,39 @@ class CursoTest {
 	@Test
 	void testInscribirMax3CursosMismoCicloLectivo() {
 		c1.inscribir(a1);
-		assertTrue(c4.inscribir(a1));
-		assertTrue(c5.inscribir(a1));
-		assertFalse(c6.inscribir(a1));
+		assertTrue(c4.inscribirAlumno(a1));
+		assertTrue(c5.inscribirAlumno(a1));
+		assertFalse(c6.inscribirAlumno(a1));
+	}
+	
+	@Test
+	void testInscribirAlumnoSinCreditos() {
+		assertTrue(c1.inscribirAlumno(a1));
+		assertFalse(c2.inscribirAlumno(a1));
+		assertFalse(c3.inscribirAlumno(a1));
+	}
+	
+	@Test
+	void testInscribirAlumnoConCreditos() {
+		assertTrue(c1.inscribirAlumno(a1));
+		a1.aprobar(c1);
+		assertFalse(c3.inscribirAlumno(a1));
+		assertTrue(c2.inscribirAlumno(a1));
+	}
+	
+	@Test
+	void testInscribirAlumnoCupo() {
+		c1.inscribirAlumno(a1);
+		assertTrue(c1.inscribirAlumno(a2));
+		assertFalse(c1.inscribirAlumno(a3));
+	}
+	
+	@Test
+	void testInscribirAlumnoMax3CursosMismoCicloLectivo() {
+		c1.inscribir(a1);
+		assertTrue(c4.inscribirAlumno(a1));
+		assertTrue(c5.inscribirAlumno(a1));
+		assertFalse(c6.inscribirAlumno(a1));
 	}
 
 	@Test
